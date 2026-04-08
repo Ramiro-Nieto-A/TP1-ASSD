@@ -1,0 +1,51 @@
+LTspice 24.1.9 for Windows
+Circuit: C:\Users\herra\Desktop\ASSD\TP1\TP1-ASSD\Simulaciones\oscilador_de_relajación.net
+Start Time: Mon Apr  6 20:58:10 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = modified trap
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+vernier = 0.5
+Gmin = 2.39452e-05
+vernier = 0.25
+vernier = 0.125
+Gmin = 1.93228e-05
+vernier = 0.166667
+vernier = 0.222222
+Gmin = 1.21835e-05
+vernier = 0.296296
+vernier = 0.395061
+Gmin = 5.89924e-06
+vernier = 0.526748
+Gmin = 1.92672e-06
+vernier = 0.702331
+vernier = 0.936441
+Gmin = 3.1469e-07
+vernier = 1
+Gmin = 3.46653e-08
+Gmin = 3.72216e-09
+Gmin = 3.99664e-10
+Gmin = 4.29136e-11
+Gmin = 4.60781e-12
+Gmin = 4.9476e-13
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 1.128 seconds.
+
+Files loaded:
+C:\Users\herra\Desktop\ASSD\TP1\TP1-ASSD\Simulaciones\oscilador_de_relajación.net
+C:\Users\herra\AppData\Local\LTspice\lib\cmp\standard.dio
+C:\Users\herra\AppData\Local\LTspice\lib\sub\TCLib\LM311.lib
+C:\Users\herra\AppData\Local\LTspice\lib\sub\TCLib\pot.lib
+C:\Users\herra\AppData\Local\LTspice\lib\sub\TCLib\vcc.lib
+
