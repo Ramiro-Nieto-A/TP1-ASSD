@@ -151,11 +151,12 @@ D \cdot sinc(nD) \cdot e^{-j2\pi nD/2} \cdot \delta(f-nf_s)
 \noindent mientras que el muestreo con S\&H dispone de la expresión:
 
 
+
 \begin{align*}
-Y(f) &= Y_{inst} - Y_{nat} =  \left[X(f) * \sum_{n \in \mathbb{Z}} \delta(f-nf_s)\right] 
+    Y(f) &=  \left[X(f) * \sum_{n \in \mathbb{Z}} \delta(f-nf_s)\right] 
 \cdot D_{hold} \cdot sinc(D_{hold} f/f_s) \cdot e^{-j2\pi D_{hold} f/2f_s} \\
-&- X(f) * \sum_{n \in \mathbb{Z}} 
-D \cdot sinc(nD_{sample}) \cdot e^{-j2\pi nD_{sample}/2} \cdot \delta(f-nf_s)
+&+ X(f) - X(f) * \sum_{n \in \mathbb{Z}} 
+D_{sample} \cdot sinc(nD_{sample}) \cdot e^{-j2\pi nD_{sample}/2} \cdot \delta(f-nf_s)
 \end{align*}
 
 De este modo, el muestreo natural presenta una modulación dependiente de la base de origen de las réplicas, que a su vez varia como función del duty. En este caso particular la sinc decae lentamente debido al duty del 25\% (al igual que todo el espectro se ve escalado por este factor).

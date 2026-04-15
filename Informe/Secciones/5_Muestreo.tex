@@ -143,12 +143,24 @@ En última instancia se tiene al muestreo con S\&H (i.e. sin re-muestrear con el
   \label{fig: muestreo con SH}
 \end{figure}
 
-\noindent donde se ha de realizar un defasaje temporal de 180° sobre la señal cuadrada empleada en la multiplicación del muestreo natural. De este modo, siendo que este defasaje se traduce en negar la transformada de Fourier, el espectro de este muestreo se caracteriza por:
+\noindent donde se ha de negar la señal cuadrada empleada en el muestreo natural alli presente. Matemáticamente, siendo la cuadrada de altura unitaria, esto se puede modelar bajo la relación:
+
+\begin{align*}
+    \overline{m}(t) = 1 - m(t)
+\end{align*}
+
+\noindent Espectralmente esto se corresponde con:
+
+\begin{align*}
+    \overline{M}(f) = \delta(f) - M(f)
+\end{align*}
+
+\noindent por lo que al multiplicar la entrada temporalmente con esta señal, espectralemente resulta en el espectro de la señal menos el espectro del muestreo natural previamente analizado:
 
 \begin{align*}
     Y(f) &= Y_{inst} - Y_{nat} =  \left[X(f) * \sum_{n \in \mathbb{Z}} \delta(f-nf_s)\right] 
 \cdot D_{hold} \cdot sinc(D_{hold} f/f_s) \cdot e^{-j2\pi D_{hold} f/2f_s} \\
-&- X(f) * \sum_{n \in \mathbb{Z}} 
+&+ X(f) - X(f) * \sum_{n \in \mathbb{Z}} 
 D_{sample} \cdot sinc(nD_{sample}) \cdot e^{-j2\pi nD_{sample}/2} \cdot \delta(f-nf_s)
 \end{align*}
 
@@ -462,5 +474,4 @@ y(t) &= (A_1 + A_2)\cos(2\pi f_{in} t)\cos(2\pi \Delta t) + (A_2 - A_1)\sin(2\pi
 
 \noindent se puede destacar que si el segundo término de la ecuación (\ref{eq: 5b AM trucha})es despreciable existe un alto grado de coincidencia. Esto ocurre si $A_1 \approx A_2$. En el muestreo instantáneo y S\&H esto ocurre; sin embargo, no corresponde con el muestreo natural, dado que allí la amplitud de las componentes depende de la procedencia de las imágenes, por lo que no se puede despreciar el segundo término. Debido a esto la Figura \ref{fig: temp 5b} exhibe un comportamiento extraño.
 
-\subsubsection{Variación de frecuencia de señal cuadrada}
 

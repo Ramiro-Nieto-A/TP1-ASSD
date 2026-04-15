@@ -57,8 +57,37 @@ Para garantizar un rendimiento óptimo en el esquema implementado, se analizaron
 
 \begin{itemize}
 	\item \textbf{Tecnología y Fabricación:} Es imperativo utilizar capacitores con baja absorción dieléctrica y bajas corrientes de fuga, tales como los de Teflón, Poliestireno o Polipropileno. El uso de capacitores cerámicos estándar (como los X7R) introduciría un error de histéresis debido al 'efecto memoria' del dieléctrico, alterando la tensión retenida.
-	\newpage
+	\item 
+	\begin{figure}[H]
+    \centering
+        \centering
+        \includegraphics[width=0.55\textwidth]{Imagenes/4_S&H/histeresis.png}
+        \caption{Histéresis para distintas tecnologías \cite{TI2018_LF198}.}
+        \label{fig: 4_histeresis}
+    \end{figure}
+	
+	
 	\item \textbf{Valor de Capacitancia ($C_h$) y Tiempos:} Existe una relación de compromiso directa. Un valor de $C_h$ elevado minimiza la tasa de caída de tensión (\textit{droop rate}) durante el tiempo de \textit{hold}, pero incrementa el tiempo de adquisición necesario (tiempo de \textit{sample}) debido a la constante de carga a través de la resistencia de encendido de la llave analógica. Por el contrario, un $C_h$ reducido permite tiempos de \textit{sample} rápidos, a costa de una mayor degradación de la señal en \textit{hold}.
+	\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Imagenes/4_S&H/droop_rate.png}
+        \caption{Droop rate.}
+        \label{fig: 4_droop rate}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Imagenes/4_S&H/hold_step.png}
+        \caption{Hold step.}
+        \label{fig : hold step}
+    \end{subfigure}
+
+    \caption{No idealidades del S\&H en función del $C_h$\cite{TI2018_LF198}.}
+    \label{fig: no idealidades en funcion de Ch}
+\end{figure}
+
 	
 	\item \textbf{Limitaciones en el Rango Dinámico:} El sistema asume una posterior conversión analógico-digital de 8 bits en el rango de -2.5V a 2.5V. Esto define un rango de excursión total de 5V. El valor del bit menos significativo (LSB) se calcula como:
 	\begin{equation}
@@ -85,7 +114,8 @@ Eligiendo un valor comercial estándar, se propone como óptimo \textbf{$C_h = 2
 	\item \textit{Verificación de inyección:} $\Delta V_{step} = \frac{20\text{ pC}}{2.2\text{ nF}} \approx 9.09\text{ mV} < 19.53\text{ mV}$.
 	\item \textit{Verificación de droop rate:} Asumiendo una fuga típica de $100\text{ pA}$, la caída en un período completo de $100\text{ }\mu\text{s}$ será de apenas $4.5\text{ }\mu\text{V}$, siendo un error totalmente despreciable frente al LSB.
 \end{itemize}
-\newpage
+
+
 \textbf{2. Determinación de los Tiempos de \textit{Sample} y \textit{Hold} más convenientes:}
 
 Con una frecuencia de muestreo $f_s = 10\text{ kHz}$, el período es $T_s = 100\text{ }\mu\text{s}$. El tiempo de \textit{sample} debe garantizar la carga plena de nuestro capacitor de $2.2\text{ nF}$ a través de la resistencia interna de la llave ($R_{ON} \approx 300\text{ }\Omega$). Para alcanzar precisión de 8 bits, se necesitan al menos $5.5$ constantes de tiempo ($\tau = R_{ON} \cdot C_h$):
@@ -112,7 +142,8 @@ Los amplificadores operacionales internos del LF398 presentan un desajuste en su
 	\item \textbf{Topología elegida:} Se conecta un potenciómetro de $1\text{ k}\Omega$ al Pin 2, el cual tambien se limita con una resistencia de $24\text{ k}\Omega$ conectada a GND.
 	\item \textbf{Justificación técnica:} Conectar el potenciómetro directamente a la fuente haría la calibración muy brusca (rango de $5\,\text{V}$). Al añadir la resistencia de $24\,\text{k}\Omega$, se forma un divisor que reduce el rango a aproximadamente $\pm 100\,\text{mV}$, permitiendo un ajuste fino y preciso para cancelar el \textit{offset} y obtener $0\,\text{V}$ de salida cuando $V_{in} = 0\,\text{V}$.
 \end{itemize}
-\newpage
+
+
 \textbf{2. Compensación del Hold Step (AC Zeroing):}
 
 El error dinámico más severo ocurre en el instante de transición entre \textit{sample} y \textit{hold}. Al conmutar el pin de control (Pin 8), la capacitancia parásita compuerta-canal de la llave analógica interna inyecta un pulso de carga ($Q_{inj}$) en el capacitor de \textit{hold} conectado al Pin 6, provocando un salto de tensión no deseado o \textit{hold step}.
@@ -128,12 +159,12 @@ Para cancelar este efecto, se requiere inyectar artificialmente una cantidad de 
 	
 	Donde $\Delta V_{pot}$ es la amplitud del salto de tensión ajustada por el cursor. Calibrando el potenciómetro de $10\text{ k}\Omega$ mientras se observa la salida en un osciloscopio, se iguala la magnitud para que $Q_{comp} = -Q_{inj}$. De esta forma, el \textit{hold step} queda virtualmente anulado a nivel de \textit{hardware}, protegiendo el rango dinámico del sistema.
 \end{itemize}
-\newpage
+
 Generando de esta manera la siguiente configuración para el S\&H:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = 0.6\textwidth]{Imagenes/4_S&H/S&H_Config.pdf}
-	\caption{Conexiones hechas para el integrado LF398}
+	\caption{Conexiones hechas para el integrado LF398 \cite{TI2018_LF198}.}
 	\label{fig: filtro}
 \end{figure}
 
