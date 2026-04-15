@@ -206,14 +206,13 @@ Por otro lado, la no-idealidad del FR conlleva que la señal de salida disponga 
 Finalmente, la figura \ref{fig: fase} da cuenta de otro hecho a tener en consideración: los filtros alteran la fase de la señal de un modo no lineal. De este modo, la integridad de la señal en cuestión se vera inherentemente afectada.
 
 \subsection{Marco experimental}
-Dadas las señales:
+Dadas las señales con $f_{in} = 15kHz$:
 
-\begin{align*}
-    {x_3}_{(t)} &= A \cdot \cos(2\pi \cdot f_{in}\cdot t) & \\
-    {x_4}_{(t)} &= \text{onda cuadrada, con } T=2/f_{in} \ \& \ DC=75\% &
-\end{align*}
+\begin{itemize}
+    \item $x_3(t) = A \cdot \cos(2\pi \cdot f_{in}\cdot t)$    \item $x_4(t) = \text{onda cuadrada, con } T=2/f_{in} \ \& \ DC=75\%$
+\end{itemize}
 
-\noindent con $f_{in} = 15kHz$. Se piden analizar diferentes configuraciones:
+Se piden analizar diferentes configuraciones:
 
 \subsubsection{Salida proporcional}
 En primera instancia debemos analizar la frecuencia de muestreo ($f_s$), amplitud ($A$) y duty cycle ($D$) para muestrear ambas señales bajos esquemas y obtener una señal con mínima distorsión a la salida.
@@ -300,7 +299,7 @@ La modulación por la sinc esta dada por las relaciones:
     \label{fig: muestreo nat 5.a}
 \end{figure}
 
-\noindent donde se recupera la señal original escalada y defasada indistinguiblemente entre frecuencias de muestreo. Respecto al factor de escala, el rango dinámico se ve restringuido por la atenuación D en el caso del muestreo natural y $D \cdot sinc(D \cdot f/f_s) $ en el caso del muestreo instantáneo; junto con la atenuación propia del filtro.
+Donde se recupera la señal original escalada y defasada indistinguiblemente entre frecuencias de muestreo. Respecto al factor de escala, el rango dinámico se ve restringuido por la atenuación D en el caso del muestreo natural y $D \cdot sinc(D \cdot f/f_s) $ en el caso del muestreo instantáneo; junto con la atenuación propia del filtro.
 
 Si se toman las mediciones realizadas con $f_s = 47kHz$, en el muestreo instantáneo se recuperó $0.27^2 / 0.48^2 = 31.6\%$, mientras que en el muestreo natural $0.284^2 / 0.48^2 = 35\%$:
 
